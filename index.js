@@ -7,7 +7,7 @@ const { LOGS_CHANNEL_ID, BOT_TOKEN } = process.env
 
 client.on('ready', () => { 
     console.log(`Bot online! ${client.user.username}`);
-	client.user.setActivity('deleted messages', { type: 'WATCHING' })
+	client.user.setActivity('messages', { type: 'WATCHING' })
 		.then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
 		.catch(console.error);
 })
@@ -15,12 +15,13 @@ client.on('ready', () => {
 client.on('messageDelete', async message => {
 	if (message.author.bot) return;
 
-	const logChannel = message.guild.channels.cache.find(c => c.id === LOGS_CHANNEL_ID)
+	const logChannel =  await client.channels.fetch(LOGS_CHANNEL_ID)
+
     if (!logChannel) return;
     
 	const embed = new MessageEmbed()
 		.setColor('#000000')
-		.setThumbnail(message.author.displayAvatarURL())
+		.setThumbnail(message.author.avatarURL({ dynamic: true }))
 		.setTimestamp();
 
 	let info = stripIndents` **Message Deleted**
