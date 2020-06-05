@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ysdenz/discord-deleted-message-logger#readme",
   "dependencies": {
+    "@vitalets/google-translate-api": "^3.0.0",
     "common-tags": "^1.8.0",
     "discord.js": "^12.1.1",
     "dotenv": "^8.2.0"
