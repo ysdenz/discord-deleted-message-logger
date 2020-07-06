@@ -43,6 +43,16 @@ client.on('message', async message => {
 	if (message.author.bot) return;
 
 	// for gif filter
+	const regexr = (msg) => {
+		if (msg.match(/https?:\/\/(.*|gyfcat.com)(\.gif)?/) && !message.member.hasPermission('MANAGE_EMOJIS')) {
+			try {
+				message.delete()
+				message.reply('GIF usage is exclusive to server boosters <:smirky:681481290721394702>')
+			} catch (error) {
+				console.log(error.message);
+			}
+		}
+	};
 	if (message.content) regexr(message.content)
 	if (message.attachments.size > 0) regexr(message.attachments.first().proxyURL)
 
@@ -97,20 +107,6 @@ client.on('message', async message => {
 					.setColor('#7a0909')
 				);
 			});
-
-
-	
-	// function/s
-	const regexr = (msg) => {
-		if (msg.match(/https?:\/\/(.*|gyfcat.com)(\.gif)?/) && !message.member.hasPermission('MANAGE_EMOJIS')) {
-			try {
-				message.delete()
-				message.reply('GIF usage is exclusive to server boosters <:smirky:681481290721394702>')
-			} catch (error) {
-				console.log(error.message);
-			}
-		}
-	};
 	
 })
 
