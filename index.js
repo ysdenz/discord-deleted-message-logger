@@ -41,6 +41,11 @@ client.on('messageDelete', async message => {
 
 client.on('message', async message => {
 	if (message.author.bot) return;
+
+	// for gif filter
+	if (message.content) regexr(message.content)
+	if (message.attachments.size > 0) regexr(message.attachments.first().proxyURL)
+
 	if (!message.content.startsWith(PREFIX)) return;
 	const args = message.content.slice(PREFIX.length).trim().split(/ +/g);
 
@@ -79,6 +84,8 @@ client.on('message', async message => {
 
 					To: **${to}**
 					${res.text}
+
+					To know more language codes [click here.](https://cloud.google.com/translate/docs/languages)
 				`));
 
 			})
@@ -90,6 +97,20 @@ client.on('message', async message => {
 					.setColor('#7a0909')
 				);
 			});
+
+
+	
+	// function/s
+	const regexr = (msg) => {
+		if (msg.match(/https?:\/\/(.*|gyfcat.com)(\.gif)?/) && !message.member.hasPermission('MANAGE_EMOJIS')) {
+			try {
+				message.delete()
+				message.reply('GIF usage is exclusive to server boosters <:smirky:681481290721394702>')
+			} catch (error) {
+				console.log(error.message);
+			}
+		}
+	};
 	
 })
 
