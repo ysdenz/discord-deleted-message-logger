@@ -39,6 +39,22 @@ client.on('messageDelete', async message => {
 	logChannel.send(embed.setDescription(info))
 })
 
+client.on('messageUpdate', async newMessage => {
+		// for gif filter
+		const regexr = (msg) => {
+			if (msg.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:gif)|(http|https):\/\/(tenor|gfycat).com\/(.*)/gm) && !message.member.hasPermission('MANAGE_EMOJIS')) {
+				try {
+					newMessage.delete()
+					newMessage.reply('Nice try <:smirky:681481290721394702> GIF usage is exclusive to server boosters <:noisi:694586016450871386>')
+				} catch (error) {
+					console.log(error.message);
+				}
+			}
+		};
+		if (newMessage.content) regexr(newMessage.content)
+		if (newMessage.attachments.size > 0) regexr(newMessage.attachments.first().proxyURL)
+})
+
 client.on('message', async message => {
 	if (message.author.bot) return;
 
