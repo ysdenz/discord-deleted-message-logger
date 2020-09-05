@@ -42,7 +42,7 @@ client.on('messageDelete', async message => {
 client.on('messageUpdate', async (oldMessage, newMessage) => {
 		// for gif filter
 		const regexr = (msg) => {
-			if (msg.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:gif)|(http|https):\/\/(tenor|gfycat).com\/(.*)/gm) && !message.member.hasPermission('MANAGE_EMOJIS')) {
+			if (msg.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:gif)|(http|https):\/\/(tenor|gfycat).com\/(.*)/gm) && !oldMessage.member.hasPermission('MANAGE_EMOJIS')) {
 				try {
 					newMessage.delete()
 					newMessage.reply('Nice try <:smirky:681481290721394702> GIF usage is exclusive to server boosters <:noisi:694586016450871386>')
