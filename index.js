@@ -39,7 +39,7 @@ client.on('messageDelete', async message => {
 	logChannel.send(embed.setDescription(info))
 })
 
-client.on('messageUpdate', async newMessage => {
+client.on('messageUpdate', async (oldMessage, newMessage) => {
 		// for gif filter
 		const regexr = (msg) => {
 			if (msg.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:gif)|(http|https):\/\/(tenor|gfycat).com\/(.*)/gm) && !message.member.hasPermission('MANAGE_EMOJIS')) {
