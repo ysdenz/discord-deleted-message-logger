@@ -1,4 +1,4 @@
-const translate = require('@vitalets/google-translate-api');
+const translate = require('google-translate-api');
 const { stripIndents } = require('common-tags');
 const { Client, MessageEmbed } = require('discord.js');
 const lang = require('./languages.json');
