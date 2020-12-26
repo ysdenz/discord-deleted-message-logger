@@ -3,7 +3,13 @@ const { stripIndents } = require('common-tags');
 const { Client, MessageEmbed } = require('discord.js');
 const lang = require('./languages.json');
 
-const client = new Client({ disableEveryone: true });
+const client = new Client({
+	ws: {
+		intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_EMOJIS', 'GUILD_MESSAGE_REACTIONS',
+			'GUILD_PRESENCES', 'GUILD_MESSAGES'],
+	},
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+});
 
 require('dotenv').config()
 const { LOGS_CHANNEL_ID, BOT_TOKEN, PREFIX } = process.env
@@ -57,7 +63,7 @@ client.on('messageUpdate', async (oldMessage, newMessage) => {
 
 client.on('message', async message => {
 	if (message.author.bot) return;
-
+	if (message.channel.type === 'dm') return;
 	// for gif filter
 	const regexr = (msg) => {
 		if (msg.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:gif)|(http|https):\/\/(tenor|gfycat).com\/(.*)/gm) && !message.member.hasPermission('MANAGE_EMOJIS')) {
