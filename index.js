@@ -6,7 +6,7 @@ const lang = require('./languages.json');
 const client = new Client({
 	ws: {
 		intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_EMOJIS', 'GUILD_MESSAGE_REACTIONS',
-			'GUILD_PRESENCES', 'GUILD_MESSAGES'],
+			'GUILD_MESSAGES'],
 	},
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
